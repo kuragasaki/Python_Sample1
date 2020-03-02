@@ -42,9 +42,6 @@ def output_massage(message_number):
     # メッセージ番号によって出力メッセージを変えてみる
     messages[message_number]   
     
-#if check_word == input():
-#        print("テスト")
-
 ## タイピング処理（メイン）
 if __name__ == "__main__":
     
