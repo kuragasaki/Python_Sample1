@@ -45,7 +45,7 @@ def count_point(check, check_point):
 def check_empty_space(player, count_map):
     for key, value in count_map.items():
         if value == 3:
-            print(player.join(" win"))
+            print(player + " win")
             return value
         elif value == 2:
             return key
@@ -65,6 +65,9 @@ def check_diagonal(player, base_point, check_point):
                 count += 1
             elif view_list[index][2 - index] != empty_point:
                 count -= 1
+
+    if count == 3:
+        print(player + " win")
 
     return count
 
@@ -160,10 +163,10 @@ def game_check():
             print("cpu win")
             return True
 
-        elif check_diagonal("you", "left", user_point) == 3 or check_diagonal("you", "left", user_point) == 3:
+        elif check_diagonal("you", "left", user_point) == 3 or check_diagonal("you", "right", user_point) == 3:
             return True
         
-        elif check_diagonal("cpu", "left", cpu_point) == 3 or check_diagonal("cpu", "left", cpu_point) == 3:
+        elif check_diagonal("cpu", "left", cpu_point) == 3 or check_diagonal("cpu", "right", cpu_point) == 3:
             return True
 
     empty_count = 0
