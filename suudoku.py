@@ -22,8 +22,10 @@ class NoneToNumber:
     cel_index_list = []
     candidate_list = []
 
-    def __init__(self, row_number):
-        self.row_index = row_number
+    def __init__(self, row_index, cel_index_list, candidate_list):
+        self.row_index = row_index
+        self.cel_index_list = cel_index_list
+        self.candidate_list = candidate_list
 
 # 盤面チェック
 def check_number(check_list):
@@ -67,40 +69,10 @@ def pickUp_none():
 
         # 数字が埋まっていない箇所が存在する
         if len(cel_number_list) > 0:
-            tmpClass = NoneToNumber(row_index)
-            tmpClass.cel_index_list = copy.copy(cel_number_list)
-            tmpClass.candidate_list = copy.copy(candidate_list)
-
+            tmpClass = NoneToNumber(row_index, cel_number_list, candidate_list)
             pickUpMap[row_index] = tmpClass
 
     return pickUpMap
-
-def pickUp_none_cel():
-    pickUpMap = {}
-    for cel_index in range(len(suudoku[0])):
-        row_number_list = []
-        candidate_list = []
-        for row_index in range(len(suudoku[0])):
-
-            # 行から数字が埋まっていない箇所を探す（列番号を押さえる）
-            if suudoku[row_index][cel_index] == None:
-                cel_number_list.append(cel_index)
-        
-        for number in range(1, 10):
-            # 使用されていない数字をピックアップ
-            if number not in suudoku[row_index]:
-                candidate_list.append(number)
-
-        # 数字が埋まっていない箇所が存在する
-        if len(cel_number_list) > 0:
-            tmpClass = NoneToNumber(row_index)
-            tmpClass.cel_index_list = copy.copy(cel_number_list)
-            tmpClass.candidate_list = copy.copy(candidate_list)
-
-            pickUpMap[row_index] = tmpClass
-
-    return pickUpMap
-
 
 #  埋まっていない箇所が少ない行を探す（行番号を押さえる）
 def getNoneMinCount(pickUpMap):
